@@ -1,4 +1,3 @@
-use crate::instr::Instruction;
 use crate::executable::Executable;
 
 pub struct Memory {

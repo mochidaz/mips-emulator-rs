@@ -1,6 +1,6 @@
 use crate::register::RegID;
 
-pub enum Instruction {
+pub enum AsmInstr {
 	Add(RegID, RegID, RegID),
 	Sub(RegID, RegID, RegID),
 	Addi(RegID, RegID, i32),
@@ -10,3 +10,4 @@ pub enum Instruction {
 	Mult(RegID, RegID),
 	Div(RegID, RegID),
 }
+

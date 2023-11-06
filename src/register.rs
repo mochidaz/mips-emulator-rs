@@ -1,3 +1,4 @@
+#[derive(Copy, Clone)]
 pub enum RegID {
     Zero,
     V0, V1,
