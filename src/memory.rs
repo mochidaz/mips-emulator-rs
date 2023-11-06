@@ -1,35 +1,28 @@
 use crate::instr::Instruction;
-
-pub struct RAM {
-    data: Vec<u32>,
-}
-
-pub struct ROM {
-    instructions: Vec<u32>
-}
+use crate::executable::Executable;
 
 pub struct Memory {
-    ram: RAM,
-    rom: ROM,
+    ram: Vec<u32>,
+    rom: Vec<u32>,
 }
 
 impl Memory {
     pub fn new() -> Memory {
         Self {
-            ram: RAM {
-                data: vec![0; 2048],
-            },
-            rom: ROM {
-                instructions: vec![],
-            },
+            ram: vec![0; 2048],
+            rom: vec![],
         }
     }
 
     pub fn read(&self, addr: u32) -> u32 {
-        self.ram.data[addr as usize]
+        self.ram[addr as usize]
     }
 
     pub fn write(&mut self, addr: u32, data: u32) {
-        self.ram.data[addr as usize] = data;
+        self.ram[addr as usize] = data;
+    }
+
+    pub fn write_rom(&mut self, executable: &Executable) {
+        self.rom = executable.code.clone();
     }
 }
