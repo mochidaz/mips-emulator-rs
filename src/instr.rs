@@ -1,4 +1,4 @@
-use register::RegID;
+use crate::register::RegID;
 
 pub enum Instruction {
 	Add(RegID, RegID, RegID),
@@ -9,6 +9,4 @@ pub enum Instruction {
 	Mul(RegID, RegID, RegID),
 	Mult(RegID, RegID),
 	Div(RegID, RegID),
-	Add(),
-	Add(),
 }

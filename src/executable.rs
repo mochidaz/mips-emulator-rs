@@ -1,4 +1,4 @@
-use instr::Instruction;
+use crate::instr::Instruction;
 
 pub struct Executable {
 	code: Vec<u32>,
@@ -8,9 +8,7 @@ pub struct Executable {
 impl Executable {
 	pub fn assemble(instructions: Vec<Instruction>) {
 		for i in instructions {
-			match i {
-
-			}
+			unimplemented!()
 		}
 	}
 }
