@@ -1,4 +1,5 @@
 use crate::instr::AsmInstr;
+use crate::instr::RtypeFn;
 use crate::register::RegID;
 
 pub struct Executable {
@@ -22,22 +23,28 @@ impl Executable {
 		for i in instructions {
 			match i {
 				AsmInstr::Add(dest, source, target) => {
-					self.code.push(Self::encode_rtype(0u32, 0b100000u32, 0u32, dest, source, target));
+					self.code.push(Self::encode_rtype(0u32, RtypeFn::Add, 0u32, dest, source, target));
 				},
+                AsmInstr::Addu(dest, source, target) => {
+                    self.code.push(Self::encode_rtype(0u32, RtypeFn::Addu, 0u32, dest, source, target));
+                },
 				AsmInstr::Sub(dest, source, target) => {
-					self.code.push(Self::encode_rtype(0u32, 0b100010u32, 0u32, dest, source, target));
+					self.code.push(Self::encode_rtype(0u32, RtypeFn::Sub, 0u32, dest, source, target));
+				},
+				AsmInstr::Subu(dest, source, target) => {
+					self.code.push(Self::encode_rtype(0u32, RtypeFn::Subu, 0u32, dest, source, target));
 				},
 				_ => todo!(),
 			}
-			unimplemented!()
 		}
 	}
 
-	fn encode_rtype(opcode: u32, function: u32, sa: u32, dest: RegID, source: RegID, target: RegID) -> u32 {
+	fn encode_rtype(opcode: u32, function: RtypeFn, sa: u32, dest: RegID, source: RegID, target: RegID) -> u32 {
 		let rd = dest as u32;
 		let rt = target as u32;
 		let rs = source as u32;
-		return (function & 0x3F) |
+        let funct = function as u32;
+		return (funct & 0x3F) |
 			((rd & 0x1F) << 11) |
 			((rt & 0x1F) << 16) |
 			((rs & 0x1F) << 21) |
