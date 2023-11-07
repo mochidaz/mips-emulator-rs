@@ -7,8 +7,8 @@ pub enum AsmInstr {
     Addi(RegID, RegID, i32),
 	Sub(RegID, RegID, RegID),
     Subu(RegID, RegID, RegID),
-	Mul(RegID, RegID, RegID),
 	Mult(RegID, RegID),
+    Multu(RegID, RegID),
 	Div(RegID, RegID),
 
 	// Logical
@@ -28,21 +28,27 @@ pub enum AsmInstr {
 pub enum RtypeFn {
     Add = 0b100000,
     Addu = 0b100001,
-	Addi = 0b001000,
     Sub = 0b100010,
     Subu = 0b100011,
-	Mul = 0b000010,
 	Mult = 0b011000,
 	Div = 0b011010,
-
 	And = 0b100100,
-	Andi = 0b001100,
 	Or = 0b100101,
-	Ori = 0b001101,
 }
 
 pub enum OpCode {
+    Rtype = 0,
+    Addi = 0b001000,
+    Addiu = 0b001001,
+    Andi = 0b001100,
+    Ori = 0b001101,
+    Lui = 0b001111,
+    Lb = 0b100000,
+    Lbu = 0b100100,
+    Lh = 0b100001,
+    Lhu = 0b100101,
 	Lw = 0b100011,
+    Sb = 0b101000,
+    Sh = 0b101001,
 	Sw = 0b101011,
-	Lui = 0b001111,
 }
