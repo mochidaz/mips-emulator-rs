@@ -22,10 +22,10 @@ impl Executable {
 		for i in instructions {
 			match i {
 				AsmInstr::Add(dest, source, target) => {
-					Self::encode_rtype(0u32, 0b100000u32, 0u32, dest, source, target);
+					self.code.push(Self::encode_rtype(0u32, 0b100000u32, 0u32, dest, source, target));
 				},
 				AsmInstr::Sub(dest, source, target) => {
-					Self::encode_rtype(0u32, 0b100010u32, 0u32, dest, source, target);
+					self.code.push(Self::encode_rtype(0u32, 0b100010u32, 0u32, dest, source, target));
 				},
 				_ => todo!(),
 			}
